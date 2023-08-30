@@ -1,0 +1,59 @@
+<style type="text/css">
+        .form-signin {
+        max-width: 420px;
+        padding: 1rem;
+    }
+
+    .form-signin .form-floating:focus-within {
+        z-index: 2;
+    }
+
+    .form-signin input[type="username"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+</style>
+
+{% extends 'base.html' %}
+{% block content %}
+    <main class="form-signin w-100 m-auto">
+    </br>
+        <form method="post">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+            <fieldset>
+            <div class="form-floating">
+            <input type="username" name="username" class="form-control" id="floatingInput" placeholder="Username">
+            <label for="floatingInput">Username</label>
+            </div>
+            <div class="form-floating">
+            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+            </div>
+
+                {% for error in user_login.field.errors %}
+                    <p style="color:red;">{{error}}</p>
+                {% endfor %}
+
+                {% if user_login.non_field_errors %}
+                    <div style="color:red;">
+                        <p>{{user_login.non_field_errors}}</p>
+                    </div>
+                {% endif %}
+            </fieldset>
+            </br>
+            <button class="btn btn-primary w-100 py-2" type="submit">Log in</button>
+        </form>
+    </main>
+
+
+{% endblock content %}

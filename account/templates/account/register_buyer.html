@@ -1,0 +1,81 @@
+<style type="text/css">
+        .form-signin {
+        max-width: 420px;
+        padding: 1rem;
+    }
+
+    .form-signin .form-floating:focus-within {
+        z-index: 2;
+    }
+
+    .form-signin input[type="username"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+</style>
+{% extends 'base.html'%}
+<title>Registration page</title>
+{% block content %}
+
+<main class="form-signin w-100 m-auto">
+    </br>
+        <form method="post">
+            {% csrf_token %}
+
+            {{registration_buyer.management_form}}
+            {{registration_base.management_form}}
+            <h1 class="h3 mb-3 fw-normal">Register Buyer Account</h1>
+
+            <fieldset>
+            <div class="form-floating">
+            <input type="username" name="username" class="form-control" id="floatingInput" placeholder="Username">
+            <label for="floatingInput">Username</label>
+            </div>
+            <div class="form-floating">
+            <input type="text" name="email" class="form-control" id="floatingInput" placeholder="example@site.url">
+            <label for="floatingInput">E-mail</label>
+            </div>
+            <div class="form-floating">
+            <input type="password" name="password1" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+            </div>
+            <div class="form-floating">
+            <input type="password" name="password2" class="form-control" id="floatingInput" placeholder="Password, again">
+            <label for="floatingPassword">Repeat password</label>
+            </div>
+            <div class="form-floating">
+            <input type="text" name="full_name" class="form-control" id="floatingInput" placeholder="Jane Doe">
+            <label for="floatingInput">Full Name</label>
+            </div>
+            <div class="form-floating">
+            <input type="text" name="phone" class="form-control" id="floatingInput" placeholder="">
+            <label for="floatingInput">Phone number</label>
+            </div>
+            <div class="form-floating">
+            <input type="text" name="shipping_address" class="form-control" id="floatingInput" placeholder="">
+            <label for="floatingInput">Shipping address</label>
+            </div>
+            <div class="form-floating">
+            <input type="text" name="billing_address" class="form-control" id="floatingInput" placeholder="">
+            <label for="floatingInput">Billing Address</label>
+            </div>
+
+            <div>
+                {{formset.errors}}
+                {{formset.non_field_errors}}
+            </div>    
+            </fieldset>
+            </br>
+            <button class="btn btn-primary w-100 py-2" type="submit">Register account</button>
+        </form>
+    </main>
+
+{% endblock content%}

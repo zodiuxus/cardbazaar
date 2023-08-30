@@ -1,0 +1,82 @@
+<style type="text/css">
+    .form-signin {
+        max-width: 420px;
+        padding: 1rem;
+    }
+
+    .form-signin .form-floating:focus-within {
+        z-index: 2;
+    }
+
+    .form-signin input[type="username"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="text"] {
+        margin-bottom: 10px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+</style>
+
+{% extends 'base.html' %}
+{% block content %}
+<main class="form-signin w-100 m-auto">
+    </br>
+        <form method="post" enctype="multipart/form_data">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 fw-normal">List a card</h1>
+            <div class="form-floating">
+                <input type="text" name="card_name" class="form-control" id="floatingInput">
+                <label for="floatingInput">Card name</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" name="card_quality" class="form-control" id="floatingInput"> 
+                <label for="floatingInput">Card quality</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" name="card_price" class="form-control" id="floatingInput">
+                <label for="floatingInput">Price</label>
+            </div>
+            <div class="form-floating">
+                <input type="file" name="card_image" class="form-control" id="formFile">
+                <label for="formFile">Card image</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" name="card_notes" class="form-control" id="floatingInput">
+                <label for="floatingPassword">Notes</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" name="card_stock" class="form-control" id="floatingInput">
+                <label for="floatingInput">Card stock</label>
+            </div>
+
+            <fieldset>
+                {% for field in addcard %}
+                
+                    {% for error in field.errors %}
+                        <p style="color:red;">{{error}}</p>
+                    {% endfor %}
+
+                    {% if non_field_errors %}
+                        <div style="color:red;">
+                            <p>{{non_field_errors}}</p>
+                        </div>
+                    {% endif %}
+
+                {% endfor %}
+            </fieldset>
+            </br>
+            <button class="btn btn-primary w-100 py-2" type="submit">List card</button>
+        </form>
+    </main>
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Register Account</h1>
+        <p class="lead text-body-secondary">Choose which kind of account you would like to register as. These accounts are mutually exclusive.</p>
+        <p>
+          <a href="{% url 'account:buyeraccount' %}" class="btn btn-primary my-2">Buyer account</a>
+          <a href="{% url 'account:selleraccount' %}" class="btn btn-success my-2">Seller account</a>
+        </p>
+        <br>
+        <h1 class="fw-light">Already have an account?</h1>
+        <p>
+            <a href="{% url 'account:login' %}" class="btn btn-primary my-2">Login</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% csrf_token %}
+
+{% block content %}
+<div class="container">
+    <div class="hstack gap-3 mx-auto p-2 justify-content-center">
+        {% if request.user.seller_account %}
+            <div class="">
+                <h2 class="fw-light">Your cards in stock</h2>
+                <ul>
+                    {% for card in cards %}
+                        <li>{{card.card_name}} | {{card.card_quality}} | {{card.card_stock}} </li>
+                    {% endfor %}
+                </ul>
+            </div>
+                <div class="vr"></div>
+            <div class="">
+                <a href="{% url 'account:addcard' %}" class="btn btn-outline-primary my-2">Add a card?</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
