@@ -118,7 +118,7 @@
               {% url 'account:login' as login %}
               {% url 'account:registerbuyer' as regbuy %}
               {% url 'account:registerseller' as regsel%}
-              {% if request.get_full_path != reg and login and regbuy and regsel%}
+              {% if request.get_full_path != reg or login or regbuy or regsel%}
                   <a class="btn btn-outline-light" href="{% url 'account:index' %}">Register</a>
               {% endif %}
           {% endif %}            
