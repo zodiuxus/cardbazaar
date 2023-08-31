@@ -80,12 +80,19 @@ class SellerCardDetail(models.Model):
     card_name = models.TextField(default="CARDNAME")
     card_quality = models.CharField(max_length=16)
     card_price = models.DecimalField(max_digits=19, decimal_places=2)
-    card_image = models.ImageField(verbose_name="OPTIONAL, card images do not need to be supplied, but sellers are encouraged to do so.", blank=True, upload_to=user_dir_upload)
-    card_url = models.URLField()
-    card_notes = models.TextField(blank=True)
-    card_stock = models.IntegerField(default=0, blank=False)
+    card_image = models.URLField(blank=True, null=True) # automatically acquired from user card search when they select the card, or it should be once it's implemented
+    # if card_image were to be linked to the CardData model, it would cause all sorts of chaos, so i'd rather have the CD model stay as is, and only pull data
+    # from it as necessary (through a search form). will it be hacky? probably. do i care? not particularly, as long as it works.
+    card_url = models.URLField(blank=True, null=True)
+    card_notes = models.TextField(blank=True, null=True)
+    card_stock = models.IntegerField(default=1, blank=False)
     date_added = models.DateTimeField(auto_now_add=True)
     seller_details = models.ForeignKey(SellerAccount, on_delete=models.CASCADE)
     def __str__(self):
         return self.seller_details.user.username
-    
+
+class CardData(models.Model):
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    cardid = models.TextField(null=False, default="something's gone wrong, this shouldn't be like this")
+    name = models.TextField(null=False)
+    png = models.URLField(null=True, blank=True)

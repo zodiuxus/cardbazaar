@@ -14,11 +14,16 @@ class BaseUserRegistrationForm(UserCreationForm):
         model = UserAccount
         fields = ("username", "email", "full_name", "phone", "password1", "password2")
 
+class SellerCardBase(forms.BaseInlineFormSet):
+    def clean(self):
+        if not self.has_changed():
+            raise forms.ValidationError('I have no idea what went wrong, but I know this error is here')
+
 BuyerRegistrationFormSet = inlineformset_factory(UserAccount, BuyerAccount, fields=('shipping_address', 'billing_address',))
 
 SellerRegistrationFormSet = inlineformset_factory(UserAccount, SellerAccount, fields=('swift_code_transaction',))
 
-SellerCardFormSet = inlineformset_factory(SellerAccount, SellerCardDetail, fields=('card_name', 'card_quality', 'card_price', 'card_image', 'card_notes', 'card_stock'))
+SellerCardFormSet = inlineformset_factory(SellerAccount, SellerCardDetail, fields=('card_name', 'card_quality', 'card_price', 'card_notes', 'card_stock'), formset=SellerCardBase)
 
 class UserAuthenticationForm(forms.ModelForm):
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
