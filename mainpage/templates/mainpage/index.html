@@ -6,12 +6,8 @@
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Album example</h1>
-        <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
+        <h1 class="fw-light">Newest additions</h1>
+        <p class="lead text-body-secondary">Here you can find the most recent listings, or you can use the search bar at the top to find the cards you're interested in.</p>
       </div>
     </div>
   </section>
@@ -19,23 +15,34 @@
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
+        {% if not latest_cards_list %}
+          <p>No cards to show :(</p>
+        {% endif %}
+        {% for card in latest_cards_list %}
+        
+          <div class="col">
+            <div class="card shadow-sm">
+              <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{card.card_image}}" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{card.card_name}}</text></img>
+              <div class="card-body">
+                <p class="card-text">Notes: {{card.card_notes}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item"><small>Price: ${{card.card_price}}</small></li>
+                      <li class="list-group-item"><small>Quality: {{card.card_quality}}</small></li>
+                      <li class="list-group-item"><small>In stock: {{card.card_stock}}</small></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <small>{{card.seller_details}}</small> | 
+                    <small class="text-body-secondary">{{card.seller_details.seller_reputation}}&#9733;</small> 
+                  </div>
                 </div>
-                <small class="text-body-secondary">9 mins</small>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+
+        {% endfor %}
 </main>
 {% endblock content %}

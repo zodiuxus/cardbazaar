@@ -4,8 +4,8 @@
 {% block content %}
 <div class="container">
     <div class="hstack gap-3 mx-auto p-2 justify-content-center">
-        {% if request.user.seller_account %}
-            <div class="">
+        {% if request.user.selleraccount %}
+            <div class="container">
                 <h2 class="fw-light">Your cards in stock</h2>
                 <ul>
                     {% for card in cards %}

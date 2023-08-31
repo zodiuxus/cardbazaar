@@ -3,9 +3,10 @@ from django.contrib.auth import login, authenticate, logout
 from django.forms import inlineformset_factory
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import json
 
 from .forms import BaseUserRegistrationForm, SellerRegistrationFormSet, BuyerRegistrationFormSet, UserAuthenticationForm, SellerCardFormSet
-from .models import UserAccount, BuyerAccount, SellerAccount, SellerCardDetail
+from .models import UserAccount, BuyerAccount, SellerAccount, SellerCardDetail, CardData
 
 # Create your views here.
 def index(request):
@@ -93,21 +94,20 @@ def user_profile(request):
     return render(request, "account/profile.html", {"cards": cards})
 
 @login_required(login_url="/account/")
-def add_seller_card(request):
+def add_seller_card(request): # this doesn't work the way it's supposed to, not yet anyway, there are problems with the forms, not the view
     card_form = SellerCardFormSet
     user = SellerAccount.objects.get(user=request.user)
     if request.method == "POST":
-        formset = card_form(request.POST, request.FILES, instance=user)
-        print(formset)
+        formset = card_form(request.POST, instance=user)
         if formset.is_valid():
             formset.save()
             # TODO: don't immediately save a card, instead, get its name, 
             # query scryfall for it, give the user an option to choose from variations(if any)
             # then fill in the field for it
+            # this will require javascript, but I do NOT have the time
             return redirect("/")
         else:
-            print(formset.errors)
             formset = card_form(instance=user)
-        return render(request, 'account/profile/addcard.html', {"add_card": formset})
+        return render(request, 'account/profile/addcard.html', {"formset": formset})
     else:
-        return render(request, 'account/profile/addcard.html')
+        return render(request, 'account/profile/addcard.html', {"formset": card_form(instance=user)})
