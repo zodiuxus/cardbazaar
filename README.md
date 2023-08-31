@@ -1,5 +1,5 @@
 # Card Bazaar
-By default, the project only comes with the models, not with the database. First you will need to naviage to the directory and execute `python manage.py makemigrations` followed by `python manage.py migrate`.
+By default, the project only comes with the models, not with the database. First you will need to naviage to the directory and execute  `python manage.py migrate`, followed by `python manage.py migrate --run-syncdb`.
 
 To use it, first you'll need to create a superuser (with all the relevant fields) with `python manage.py createsuperuser`.
 
