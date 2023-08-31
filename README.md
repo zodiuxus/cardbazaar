@@ -1,7 +1,9 @@
 # Card Bazaar
 By default, the project only comes with the models, not with the database. First you will need to naviage to the directory and execute `python manage.py makemigrations` followed by `python manage.py migrate`.
 
-To use it, first you'll need to create a superuser (with all the relevant fields) with `python manage.py createsuperuser`. 
+To use it, first you'll need to create a superuser (with all the relevant fields) with `python manage.py createsuperuser`.
+
+Finally, to run the project, execute `python manage.py runserver`.
 
 The project is setup in a way that when a person creates an account on the website, they will have to choose between creating a Seller, or a Buyer account. If you want your superuser to have the properties of both (they are not mutually exclusive), you will have to add new Seller and Buyer accounts and connect them to the superuser from the admin page. Otherwise, users can go through the basic user creation forms as usual.
 
