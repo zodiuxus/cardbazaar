@@ -1,4 +1,20 @@
 # Card Bazaar
+Welcome to Card Bazaar, a trading market for cards designed for use within the Balkan region.
+
+The platform allows people to sell, and buy from cards among each other. 
+
+On principle, the system is designed to be simple and usable by everyone, allowing even the inexperienced to get in on the trading aspect of trading card games.
+
+Planned features:
+- Ordering
+- Messaging
+- Price trends
+- Card search
+
+The system at the moment is lackluster in features, however more will be added as time goes on. At some point, this repository will be made private - or deleted, to protect my work.
+
+---
+
 By default, the project only comes with the models, not with the database. First you will need to naviage to the directory and execute  `python manage.py migrate`, followed by `python manage.py migrate --run-syncdb`.
 
 To use it, first you'll need to create a superuser (with all the relevant fields) with `python manage.py createsuperuser`.
